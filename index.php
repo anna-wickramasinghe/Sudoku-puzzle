@@ -1,46 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
 <body>
-
-<h1>My first PHP page</h1>
-
-<?php
-echo "Hello World!";
-
-class Car{
-	public $color;
-	public $company;
-
-	public function __construct($color, $company){
-		$this->color = $color;
-		$this->company = $company;
-
-	}
-
-	public function message(){
-		return "this is my ".$this->color. " color " .$this->company. " made car.";
-
-	}
-}
-
-$my_car = new Car("red", "BMW");
+	<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+		<input name="name" type="text" placeholder="Name"><br>
+		<input name="password" type="password" placeholder="Password">
+		<input name="submit" type="submit" value="Save">
 
 
-var_dump($my_car);
-
-
-
-
-
-
-
-
-
-
-
-
-
-?> 
-
+	</form>
 </body>
 </html>
+<?php
+
+	$nameErr = $password = "";
+	$name = $name = "";
+
+	function test_input($data){
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		return $data;
+	}
+
+	if ($_SERVER["REQUEST_METHOD"] == "POST"){
+
+		$name = test_input($_POST["name"]);
+		$password = test_input($_POST["password"]);
+
+		echo "Hi {$name}, your password is : {$password}";
+	}
+	
+	
+
+?>
+
+
